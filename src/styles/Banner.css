@@ -1,0 +1,46 @@
+.banner {
+  background: url("https://i.pinimg.com/originals/5f/af/7f/5faf7f50a3d9beb73f40b4a3f09bd2fb.png");
+  height: 50vh;
+  position: relative;
+}
+.banner__searchButton {
+  background-color: white !important;
+  font-weight: 900 !important;
+  text-transform: inherit !important;
+  color: #276955 !important;
+  border-style: none !important;
+}
+.banner__searchButton:hover {
+  background-color: #276955 !important;
+  color: white !important;
+}
+
+.banner__info {
+  background-color: black;
+  color: white;
+  padding-top: 22vh;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 40px;
+  width: 300px;
+}
+
+.banner__search {
+  display: flex;
+  flex-direction: column;
+}
+
+.banner__info > button {
+  background-color: #276955;
+  color: white;
+  text-transform: inherit;
+  margin-top: 3px;
+  font-weight: 600;
+  border: none;
+}
+.banner__info > button:hover {
+  background-color: white;
+  color: #276955;
+}
+
+/* https://i.pinimg.com/originals/5f/af/7f/5faf7f50a3d9beb73f40b4a3f09bd2fb.png */
