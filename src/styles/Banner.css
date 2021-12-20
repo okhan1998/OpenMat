@@ -3,25 +3,30 @@
   height: 50vh;
   position: relative;
 }
+
+.banner__search {
+  position: relative;
+}
+
 .banner__searchButton {
-  background-color: white !important;
+  background-color: #276955 !important;
   font-weight: 900 !important;
   text-transform: inherit !important;
-  color: #276955 !important;
+  color: white !important;
   border-style: none !important;
 }
 .banner__searchButton:hover {
-  background-color: #276955 !important;
-  color: white !important;
+  background-color: white !important;
+  color: #276955 !important;
 }
 
 .banner__info {
   background-color: black;
   color: white;
-  padding-top: 22vh;
+  padding-top: 18vh;
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 40px;
+  padding-bottom: 18px;
   width: 300px;
 }
 

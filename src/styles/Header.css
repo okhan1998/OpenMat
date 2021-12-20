@@ -8,6 +8,7 @@
   z-index: 100;
   width: 100%;
   margin-top: 30px;
+  margin-bottom: 50px;
 }
 
 .header__icon {
@@ -27,13 +28,15 @@
   border: solid lightgray;
   border-width: 3px;
   border-radius: 999px;
+  margin-right: 100px;
 }
 
 .header__center > input {
   border: none;
   padding: 10px;
+  padding-left: 30px;
   outline-width: 0;
-  /* width: 600px; */
+  width: 600px;
 }
 
 .header__right {
