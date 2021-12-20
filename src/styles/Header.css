@@ -14,8 +14,8 @@
 .header__icon {
   object-fit: contain;
   height: 50px;
-  margin-left: 150px;
-  margin-top: 10px;
+  margin-left: 40px;
+  /* margin-top: 10px; */
 }
 
 .header__center {
@@ -28,7 +28,6 @@
   border: solid lightgray;
   border-width: 3px;
   border-radius: 999px;
-  margin-right: 100px;
 }
 
 .header__center > input {
@@ -36,11 +35,13 @@
   padding: 10px;
   padding-left: 30px;
   outline-width: 0;
-  width: 600px;
+  /* width: 600px; */
 }
 
 .header__right {
   display: flex;
   align-items: center;
-  margin-right: 150px;
+  justify-content: space-between;
+  width: 5vw;
+  margin-right: 80px;
 }
