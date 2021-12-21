@@ -1,0 +1,72 @@
+.openMatResult {
+  display: flex;
+  position: relative;
+  margin: 20px;
+  padding: 20px;
+  border-bottom: 1px solid lightgray;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.openMatResult:hover {
+  opacity: 0.8;
+}
+
+.openMatResult > img {
+  height: 200px;
+  width: 350px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.openMatResult__info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-left: 20px;
+}
+
+.openMatResult__heart {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
+.openMatResult__infoTop {
+  width: 40vw;
+}
+
+.openMatResult__infoTop > h3 {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.openMatResult__infoTop > p {
+  margin-top: 10px;
+  font-size: 13px;
+  color: gray;
+}
+
+.openMatResult__infoBottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.openMatResult__star {
+  color: red;
+}
+
+.openMatResult__stars {
+  display: flex;
+  align-items: center;
+}
+
+.openMatResult__price > p {
+  text-align: right;
+}
+
+.openMatResult__price {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+}

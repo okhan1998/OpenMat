@@ -8,14 +8,6 @@ function Banner() {
 
     return (
         <div className='banner'>
-            <div className='banner__search'>
-                
-                <Button onClick = {() => 
-                setShowSearch(!showSearch)}
-                className='banner__searchButton'
-                variant='outlined'>Search Dates</Button>
-                {showSearch && <Search />}
-            </div>
             <div className='banner__info'>
                 <h1>새로운 사람과 새로운 경험을</h1>
                 <h5>
@@ -25,6 +17,13 @@ function Banner() {
                 variant='outlined'>
                 오픈맷 찾기
                 </Button>
+            </div>
+            <div className='banner__search'>
+                <Button onClick = {() => 
+                setShowSearch(!showSearch)}
+                className='banner__searchButton'
+                variant='outlined'>Search Dates</Button>
+                {showSearch && <Search />}
             </div>
         </div>
     )

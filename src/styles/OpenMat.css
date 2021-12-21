@@ -1,0 +1,18 @@
+.OpenMatPage__info {
+  padding: 20px;
+}
+
+.OpenMatPage__info > p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.OpenMatPage__info > h1 {
+  margin-bottom: 30px;
+}
+
+.OpenMatPage__info > button {
+  border-radius: 30px;
+  text-transform: inherit;
+  margin: 5px;
+}
