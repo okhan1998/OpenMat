@@ -23,10 +23,10 @@
 .banner__info {
   background-color: black;
   color: white;
-  padding-top: 18vh;
+  padding-top: 25vh;
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 18px;
+  padding-bottom: 40px;
   width: 300px;
 }
 
@@ -48,4 +48,7 @@
   color: #276955;
 }
 
+.banner__info > h5 {
+  margin-top: 10px;
+}
 /* https://i.pinimg.com/originals/5f/af/7f/5faf7f50a3d9beb73f40b4a3f09bd2fb.png */
