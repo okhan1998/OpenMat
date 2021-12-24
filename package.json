@@ -4,9 +4,9 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "server.js",
   "scripts": {
-    "heroku-prebuild": "cd client && npm ci && npm run build && mv build ../",
+    "heroku-prebuild": "cd client && npm ci && npm run build && mv build ../ && cd .. && npm ci --dev",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm ci && node server.js ",
+    "start": "node server.js",
     "client": "cd client && npm start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on fail \"npm run server #\" \"npm run client #\""
