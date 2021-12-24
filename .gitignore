@@ -3,7 +3,7 @@
 node_modules
 .env
 build
-
+/database.json
 # dependencies
 /node_modules
 /.pnp
