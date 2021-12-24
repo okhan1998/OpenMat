@@ -4,8 +4,9 @@
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "server.js",
   "scripts": {
+    "heroku-prebuild": "cd client && npm ci && npm run build && mv build ../",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "npm ci && node server.js ",
     "client": "cd client && npm start",
     "server": "nodemon server.js",
     "dev": "concurrently --kill-others-on fail \"npm run server #\" \"npm run client #\""
@@ -22,10 +23,10 @@
   "homepage": "https://github.com/okhan1998/OpenMat#readme",
   "dependencies": {
     "express": "^4.17.2",
-    "nodemon": "^2.0.15",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15"
   },
   "devDependencies": {
-    "concurrently": "^6.4.0"
+    "concurrently": "^6.5.1"
   }
 }
