@@ -10,7 +10,7 @@ if(port != 5001){
         host: process.env.host,
         user: process.env.user,
         password: process.env.password,
-        port: process.env.password,
+        port: process.env.port,
         database: process.env.database
     });
     connection.connect();
