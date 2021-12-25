@@ -24,12 +24,16 @@
 .banner__info {
   background-color: black;
   color: white;
-  padding-top: 25vh;
+  padding-top: 26vh;
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 5vh;
+  padding-bottom: 4vh;
   width: 300px;
   height: 20vh;
+}
+.banner__info > h1 {
+  margin-bottom: 0;
+  margin-top: 0;
 }
 
 .banner__search {
@@ -42,7 +46,6 @@
   background-color: #276955;
   color: white;
   text-transform: inherit;
-  margin-top: 3px;
   font-weight: 600;
   border: none;
 }
@@ -57,6 +60,7 @@ a:-webkit-any-link {
 }
 
 .banner__info > h5 {
-  margin-top: 10px;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
 }
 /* https://i.pinimg.com/originals/5f/af/7f/5faf7f50a3d9beb73f40b4a3f09bd2fb.png */
