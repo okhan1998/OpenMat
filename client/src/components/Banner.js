@@ -8,6 +8,7 @@ function Banner() {
     const [showSearch, setShowSearch] = useState(false);
 
     return (
+        <>
         <div className='banner'>
             <div className='banner__info'>
                 <h1>새로운 사람과 새로운 경험을</h1>
@@ -20,14 +21,15 @@ function Banner() {
                 </Link>
                 </Button>
             </div>
-            <div className='banner__search'>
+        </div>
+        <div className='banner__search'>
                 <Button onClick = {() => 
                 setShowSearch(!showSearch)}
                 className='banner__searchButton'
                 variant='outlined'>Search Dates</Button>
                 {showSearch && <Search />}
-            </div>
         </div>
+        </>
     )
 }
 

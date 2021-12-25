@@ -2,6 +2,7 @@
   background: url("https://i.pinimg.com/originals/5f/af/7f/5faf7f50a3d9beb73f40b4a3f09bd2fb.png");
   height: 50vh;
   position: relative;
+  margin-bottom: 0;
 }
 
 .banner__search {
@@ -26,11 +27,13 @@
   padding-top: 25vh;
   padding-left: 50px;
   padding-right: 50px;
-  padding-bottom: 40px;
+  padding-bottom: 5vh;
   width: 300px;
+  height: 20vh;
 }
 
 .banner__search {
+  margin-top: 0;
   display: flex;
   flex-direction: column;
 }
