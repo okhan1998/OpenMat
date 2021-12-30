@@ -4,6 +4,7 @@ const app = express();
 const port = process.env.PORT || 5001;
 let connection = null;
 app.use(express.static('build'));
+app.use(express.static('upload'));
 const mysql = require('mysql');
 if(port != 5001){
     connection = mysql.createConnection({
