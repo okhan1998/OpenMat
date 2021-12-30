@@ -37,9 +37,8 @@ function Openmat() {
     return (
         <div className='OpenMatPage'>
             <div className='OpenMatPage__info'>
-                <p>62 stays 25 august to 30
-                august 2 guest</p>
-                <h1>Stays nearby</h1>
+                <p>총 {gymList.length}개의 체육관에 오픈매트 일정이 있습니다.</p>
+                <h1>오픈매트 체육관</h1>
                 <Button
                 variant='outlined' color='success'>Type of
                 place</Button>

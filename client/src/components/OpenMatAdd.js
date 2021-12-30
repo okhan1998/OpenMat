@@ -102,10 +102,10 @@ function OpenMatAdd(props) {
     return ( 
         <div>
             <Button variant='text' color='success' onClick={handleClickOpen}>
-                오픈맷 추가하기
+                오픈매트 추가하기
             </Button>
             <Dialog open={openmat.open} onClose={handleClose}>
-                <DialogTitle>오픈맷 추가</DialogTitle>
+                <DialogTitle>오픈매트 추가</DialogTitle>
                 <DialogContent>
                 <input  accept="image/*" id="raised-button-file" type="file"  file={openmat.file} value={openmat.fileName} onChange={handleFileChange}/><br/>
                         <label htmlFor="raised-button-file">
@@ -124,16 +124,6 @@ function OpenMatAdd(props) {
                         <Button variant="outlined" color="success" onClick={handleClose}>닫기</Button>
                 </DialogActions>
             </Dialog>
-            {/* <form onSubmit={handleFormSubmit}>
-                <h1>오픈맷 추가</h1>
-                프로필 이미지: <input type='file' name='file' file={openmat.file} value={openmat.fileName} onChange={handleFileChange}/><br/>
-                위치: <input type='text' name='location' value={openmat.location} onChange={handleValueChange}/><br/>
-                제목: <input type='text' name='title' value={openmat.title} onChange={handleValueChange}/><br/>
-                설명: <input type='text' name='description' value={openmat.description} onChange={handleValueChange}/><br/>
-                가격: <input type='text' name='price' value={openmat.price} onChange={handleValueChange}/><br/>
-                평점: <input type='text' name='star' value={openmat.star} onChange={handleValueChange}/><br/>
-                <button type="submit">추가하기</button>
-            </form> */}
         </div>
     )
 }
