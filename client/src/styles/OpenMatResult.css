@@ -66,6 +66,7 @@
 }
 
 .openMatResult__price {
+  text-align: right;
   position: absolute;
   bottom: 20px;
   right: 30px;

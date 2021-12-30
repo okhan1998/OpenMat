@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 
 app.get('/openmat/api', (req, res) => {
     connection.query(
-        'SELECT * FROM gym',
+        'SELECT * FROM gym where isDeleted = 0',
         (err, rows, fields) => {
             res.send(rows);
         }
@@ -46,7 +46,7 @@ app.get('/openmat/api', (req, res) => {
 app.use('/img', express.static('./upload'));
 
 app.post('/openmat/api', upload.single('img'), (req, res) => {
-    let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?)';
+    let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?, now(), 0)';
     let img = '/img/' + req.file.filename;
     let location = req.body.location;
     let title = req.body.title;
@@ -62,6 +62,16 @@ app.post('/openmat/api', upload.single('img'), (req, res) => {
     );
 
 })
+
+app.delete('/openmat/api/:id', (req, res) => {
+    let sql = 'UPDATE gym SET isDeleted = 1 WHERE id = ?';
+    let params = [req.params.id];
+    connection.query(sql, params,
+      (err, rows, fields) => {
+        res.send(rows);
+      }
+      )
+  })
 
 
 app.listen(port, () => console.log(`Listening on port ${port}`))

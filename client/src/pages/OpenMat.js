@@ -60,6 +60,8 @@ function Openmat() {
                 description={gym.description}
                 star={gym.star}
                 price={gym.price}
+                stateRefresh={stateRefresh}
+                id={gym.id}
             />))}
             
         </div>
