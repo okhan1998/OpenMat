@@ -26,6 +26,8 @@ if(port != 5001){
     });
     connection.connect();
 }
+const multer = require('multer');
+const upload = multer({dest: './upload'})
 
 
 app.get('/', (req, res) => {
@@ -39,6 +41,26 @@ app.get('/openmat/api', (req, res) => {
             res.send(rows);
         }
     );
+})
+
+app.use('/img', express.static('./upload'));
+
+app.post('/openmat/api', upload.single('img'), (req, res) => {
+    let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?)';
+    let img = '/img/' + req.file.filename;
+    let location = req.body.location;
+    let title = req.body.title;
+    let description = req.body.description;
+    let star = req.body.star;
+    let price = req.body.price;
+    let params = [img, location, title, description, star, price];
+    console.log(img, location, title, description, star, price);
+    connection.query(sql, params, 
+        (err, rows, fields) => {
+            res.send(rows);
+        }   
+    );
+
 })
 
 
