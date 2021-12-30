@@ -41,22 +41,18 @@ function Openmat() {
                 august 2 guest</p>
                 <h1>Stays nearby</h1>
                 <Button
-                variant='outlined'>Cancellation
-                Flexibility</Button>
-                <Button
-                variant='outlined'>Type of
+                variant='outlined' color='success'>Type of
                 place</Button>
                 <Button
-                variant='outlined'>Price</Button>
+                variant='outlined' color='success'>Price</Button>
                 <Button
-                variant='outlined'>Rooms and
-                beds</Button>
+                variant='outlined' color='success'>Date</Button>
                 <Button
-                variant='outlined'>More 
+                variant='outlined' color='success'>More 
                 filters</Button>
-            </div>
-            <div>
-                <OpenMatAdd stateRefresh={stateRefresh}/>
+                <Button
+                variant='text' color='success'><OpenMatAdd stateRefresh={stateRefresh}/></Button>
+                
             </div>
             {gymList.length === 0 ? "" : gymList.map(gym => (<OpenMatResult 
                 img={gym.img}
