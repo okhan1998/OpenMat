@@ -31,7 +31,7 @@ const multer = require('multer');
 const upload = multer({dest: './upload'})
 
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(__dirname + '/build/index.html')
 })
 
