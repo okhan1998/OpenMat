@@ -1,12 +1,14 @@
 const fs = require('fs');
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 5000;
 let connection = null;
 app.use(express.static('build'));
 app.use(express.static('upload'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 const mysql = require('mysql');
-if(port != 5001){
+if(port != 5000){
     connection = mysql.createConnection({
         host: process.env.host,
         user: process.env.user,
@@ -50,16 +52,35 @@ app.get('/openmat/api', (req, res) => {
 
 app.use('/img', express.static('./upload'));
 
+app.post('/register', (req, res) => {
+    console.log(req.body);
+    let sql = 'INSERT INTO login VALUES (null, ?, ?)';
+    let username = req.body.usernameReg;
+    let password = req.body.passwordReg;
+    console.log(username, password);
+    let params = [username, password];
+    console.log(params);
+    connection.query(sql, params,
+        (err, rows, fields) => {
+            res.send(rows);
+            console.log(rows);
+            console.log(err);
+        })
+
+})
+
+
 app.post('/openmat/api', upload.single('img'), (req, res) => {
+    console.log(req.body);
     let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?, now(), 0)';
     let img = '/img/' + req.file.filename;
     let location = req.body.location;
     let title = req.body.title;
     let description = req.body.description;
     let star = req.body.star;
-    let price = req.body.price;
+    let price = req.body.price; 
     let params = [img, location, title, description, star, price];
-    console.log(img, location, title, description, star, price);
+    // console.log(img, location, title, description, star, price);
     connection.query(sql, params, 
         (err, rows, fields) => {
             res.send(rows);
