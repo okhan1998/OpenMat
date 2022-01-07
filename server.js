@@ -42,6 +42,14 @@ app.get('/openmat', (req, res) => {
     res.sendFile(__dirname + '/build/index.html')
 })
 
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/build/index.html')
+})
+
+app.get('/login', (req, res) => {
+    res.sendFile(__dirname + '/build/index.html')
+})
+
 app.get('/openmat/api', (req, res) => {
     connection.query(
         'SELECT * FROM gym where isDeleted = 0',
