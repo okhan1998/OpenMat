@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import OpenMat from './pages/OpenMat'
 import Register from './pages/Register'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           {/* <Route path='/seminar' element={<OpenMat />}/>
           <Route path='/competition' element={<OpenMat />}/> */}
           <Route path='/register' element={<Register />} />
+          <Route path='/login' element={<Login />} />
         </Routes>
           
 

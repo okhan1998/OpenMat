@@ -6,7 +6,7 @@ let connection = null;
 app.use(express.static('build'));
 app.use(express.static('upload'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: false}));
 const mysql = require('mysql');
 if(port != 5000){
     connection = mysql.createConnection({
@@ -30,6 +30,7 @@ if(port != 5000){
     connection.connect();
 }
 const multer = require('multer');
+const { contentType } = require('express/lib/response');
 const upload = multer({dest: './upload'})
 
 
@@ -52,6 +53,25 @@ app.get('/openmat/api', (req, res) => {
 
 app.use('/img', express.static('./upload'));
 
+app.post('/login', (req, res) => {
+    let sql = 'select * from login where username = ? and password = ?'
+    let username = req.body.usernameReg;
+    let password = req.body.passwordReg;
+    let params = [username, password];
+    connection.query(sql, params,
+        (err, rows, fields) => {
+            if (err)
+                res.send({err: err});
+
+            if (rows.length > 0) 
+                res.send(rows);
+            else 
+                res.send({message: 'Wrong username/password combination!'});
+        })
+
+})
+
+
 app.post('/register', (req, res) => {
     console.log(req.body);
     let sql = 'INSERT INTO login VALUES (null, ?, ?)';
@@ -62,7 +82,6 @@ app.post('/register', (req, res) => {
     console.log(params);
     connection.query(sql, params,
         (err, rows, fields) => {
-            res.send(rows);
             console.log(rows);
             console.log(err);
         })

@@ -1,20 +1,20 @@
 import React, {useState} from 'react'
-import {post} from 'axios'
 
-function Register() {
+
+function Login() {
     const [usernameReg, setUsernameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
+    const [loginStatus, setLoginStatus] = useState('')
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
-        addRegister()
-        
+        tryLogin();
         setUsernameReg('');
         setPasswordReg('');
     }
 
-    const addRegister = () => {
-        const url = '/register';
+    const tryLogin = () => {
+        const url = '/login';
         const data = {usernameReg, passwordReg}
 
         fetch(url, {
@@ -22,15 +22,19 @@ function Register() {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(data)
         }).then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if(data.message === 'Wrong username/password combination!')
+            setLoginStatus(data.message)
+            else
+            setLoginStatus(data[0].username)
+            console.log(data)})
         .catch(err => console.log(err));
-        
     }
 
     return (
         <div>
             <form onSubmit={handleFormSubmit}>
-            <h1>Registration</h1>
+            <h1>Login</h1>
             <label>Username</label>
             <input type='text' name='username' value={usernameReg} onChange={(e) => {
                 setUsernameReg(e.target.value);
@@ -41,10 +45,11 @@ function Register() {
                 setPasswordReg(e.target.value);
             }}
             />
-            <button type='sumbit'>Register</button>
+            <button type='sumbit'>login</button>
             </form>
+            <h1>{loginStatus}</h1>
         </div>
     )
 }
 
-export default Register;
+export default Login
