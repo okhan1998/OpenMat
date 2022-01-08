@@ -1,5 +1,6 @@
 const fs = require('fs');
 const express = require('express');
+const argon2 = require('argon2');
 const app = express();
 const port = process.env.PORT || 5000;
 let connection = null;
@@ -61,30 +62,38 @@ app.get('/openmat/api', (req, res) => {
 
 app.use('/img', express.static('./upload'));
 
-app.post('/login', (req, res) => {
-    let sql = 'select * from login where username = ? and password = ?'
+app.post('/login',  (req, res) => {
+    let sql = 'select * from login where username = ?'
     let username = req.body.usernameReg;
     let password = req.body.passwordReg;
-    let params = [username, password];
+    let params = [username];
     connection.query(sql, params,
-        (err, rows, fields) => {
+        async (err, rows, fields) => {
             if (err)
                 res.send({err: err});
 
-            if (rows.length > 0) 
-                res.send(rows);
-            else 
-                res.send({message: 'Wrong username/password combination!'});
+            if (rows.length ===0){
+                res.send({message: 'username does not exist'})
+            }
+            else{
+                
+                if(await argon2.verify(rows[0].password, password)){
+                    res.send(rows)
+                }
+                else
+                res.send({message: 'Wrong username/password combination!'})
+            }
+                
         })
 
 })
 
 
-app.post('/register', (req, res) => {
+app.post('/register', async (req, res) => {
     console.log(req.body);
     let sql = 'INSERT INTO login VALUES (null, ?, ?)';
     let username = req.body.usernameReg;
-    let password = req.body.passwordReg;
+    let password = await argon2.hash(req.body.passwordReg);
     console.log(username, password);
     let params = [username, password];
     console.log(params);

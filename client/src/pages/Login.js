@@ -27,7 +27,7 @@ function Login() {
             setLoginStatus(data.message)
             else
             setLoginStatus(data[0].username)
-            console.log(data)})
+            })
         .catch(err => console.log(err));
     }
 
