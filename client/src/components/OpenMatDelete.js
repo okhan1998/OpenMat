@@ -14,8 +14,9 @@ function OpenMatDelete(props) {
         const url = '/openmat/api/' + id;
         fetch(url, {
             method: 'DELETE'
-        }).then()
-        props.stateRefresh();
+        }).then(res => res.json())
+        .then(data => console.log(data.message))
+        .finally(() => props.stateRefresh());
 
     }
     const handleClickOpen = () => {

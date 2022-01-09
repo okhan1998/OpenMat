@@ -1,9 +1,13 @@
 const fs = require('fs');
 const express = require('express');
 const argon2 = require('argon2');
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
 const app = express();
+
 const port = process.env.PORT || 5000;
 let connection = null;
+app.use(cookieParser());
 app.use(express.static('build'));
 app.use(express.static('upload'));
 app.use(express.json());
@@ -31,7 +35,6 @@ if(port != 5000){
     connection.connect();
 }
 const multer = require('multer');
-const { contentType } = require('express/lib/response');
 const upload = multer({dest: './upload'})
 
 
@@ -78,10 +81,18 @@ app.post('/login',  (req, res) => {
             else{
                 
                 if(await argon2.verify(rows[0].password, password)){
+                    const access_token = jwt.sign({ username }, 'secure', {
+                        expiresIn: 300
+                    });
+                    console.log(access_token);
+                    res.cookie('access_token', access_token, {
+                        httpOnly: true
+                    });
                     res.send(rows)
                 }
                 else
                 res.send({message: 'Wrong username/password combination!'})
+                console.log(3);
             }
                 
         })
@@ -126,13 +137,31 @@ app.post('/openmat/api', upload.single('img'), (req, res) => {
 })
 
 app.delete('/openmat/api/:id', (req, res) => {
-    let sql = 'UPDATE gym SET isDeleted = 1 WHERE id = ?';
-    let params = [req.params.id];
-    connection.query(sql, params,
-      (err, rows, fields) => {
-        res.send(rows);
-      }
-      )
+    const { access_token } = req.cookies;
+    if(!access_token){
+        res.status(401).send({message :'login이 필요합니다'})
+    }
+    
+    try {
+    const tokenusername = jwt.verify(access_token, 'secure').username;
+    let tmpsql = 'select * from login where username = ?'
+    connection.query(tmpsql, [tokenusername],
+        (terr, row, field) => {
+            if (!(row[0].username == tokenusername)){
+                throw '맞는 userinfo가 없습니다';
+            }
+                let sql = 'UPDATE gym SET isDeleted = 1 WHERE id = ?';
+                let params = [req.params.id];
+                connection.query(sql, params,
+                (err, rows, fields) => {
+                    res.send({message: '삭제되었습니다'});
+                })
+            
+        })
+    }
+    catch {
+        res.status(401).send({message:'login이 필요합니다'})
+    }
   })
 
 
