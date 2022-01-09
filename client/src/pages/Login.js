@@ -23,7 +23,7 @@ function Login() {
             body: JSON.stringify(data)
         }).then(res => res.json())
         .then(data => {
-            if(data.message === 'Wrong username/password combination!')
+            if(data.message === 'Wrong username/password combination!' || data.message === 'username does not exist')
             setLoginStatus(data.message)
             else
             setLoginStatus(data[0].username)
