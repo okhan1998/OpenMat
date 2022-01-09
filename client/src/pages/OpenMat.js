@@ -53,7 +53,8 @@ function Openmat() {
                 variant='text' color='success'><OpenMatAdd stateRefresh={stateRefresh}/></Button>
                 
             </div>
-            {gymList.length === 0 ? "" : gymList.map(gym => (<OpenMatResult 
+            {gymList.length === 0 ? "" : gymList.map(gym => (<OpenMatResult
+                key={gym.id} 
                 img={gym.img}
                 location={gym.location}
                 title={gym.title}
