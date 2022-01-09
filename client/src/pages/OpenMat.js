@@ -13,7 +13,6 @@ function Openmat() {
         async function callAPi() {
           const response = await fetch('/openmat/api');
           const body = await response.json();
-          console.log(body);
           return body;
         }
         callAPi()
@@ -25,13 +24,11 @@ function Openmat() {
         async function callAPi() {
             const response = await fetch('/openmat/api');
             const body = await response.json();
-            console.log(body);
             return body
             }
             callAPi()
                 .then(res => setGymList(res))
                 .catch(err => console.log(err))
-            console.log(gymList)
     }, ['/openmat'])
 
     return (
