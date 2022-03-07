@@ -4,15 +4,16 @@ const argon2 = require('argon2');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 const app = express();
-
-const port = process.env.PORT || 5000;
-let connection = null;
+const mysql = require('mysql');
 app.use(cookieParser());
 app.use(express.static('build'));
 app.use(express.static('upload'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
-const mysql = require('mysql');
+
+const port = process.env.PORT || 5000;
+let connection = null;
+
 if(port != 5000){
     connection = mysql.createConnection({
         host: process.env.host,
@@ -21,6 +22,7 @@ if(port != 5000){
         port: process.env.port,
         database: process.env.database
     });
+    module.exports = connection
     connection.connect();
 }else {
     const data = fs.readFileSync('./database.json')
@@ -32,25 +34,19 @@ if(port != 5000){
         port: conf.port,
         database: conf.database
     });
+    module.exports = connection
     connection.connect();
+    
 }
+
 const multer = require('multer');
 const upload = multer({dest: './upload'})
-
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/build/index.html')
 })
 
-app.get('/openmat', (req, res) => {
-    res.sendFile(__dirname + '/build/index.html')
-})
-
-app.get('/register', (req, res) => {
-    res.sendFile(__dirname + '/build/index.html')
-})
-
-app.get('/login', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(__dirname + '/build/index.html')
 })
 
@@ -118,22 +114,37 @@ app.post('/register', async (req, res) => {
 
 
 app.post('/openmat/api', upload.single('img'), (req, res) => {
-    console.log(req.body);
-    let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?, now(), 0)';
-    let img = '/img/' + req.file.filename;
-    let location = req.body.location;
-    let title = req.body.title;
-    let description = req.body.description;
-    let star = req.body.star;
-    let price = req.body.price; 
-    let params = [img, location, title, description, star, price];
-    // console.log(img, location, title, description, star, price);
-    connection.query(sql, params, 
-        (err, rows, fields) => {
-            res.send(rows);
-        }   
-    );
-
+    const { access_token } = req.cookies;
+    if(!access_token)
+        res.send({message :'login이 필요합니다'})
+        res.status(401)
+    try {
+    const tokenusername = jwt.verify(access_token, 'secure').username;
+    let tmpsql = 'select * from login where username = ?'
+    connection.query(tmpsql, [tokenusername],
+        (terr, row, field) => {
+            if (!(row[0].username == tokenusername)){
+                throw '맞는 userinfo가 없습니다';
+            }
+            let sql = 'INSERT INTO gym VALUES (null, ?, ?, ?, ?, ?, ?, now(), 0)';
+            let img = '/img/' + req.file.filename;
+            let location = req.body.location;
+            let title = req.body.title;
+            let description = req.body.description;
+            let star = req.body.star;
+            let price = req.body.price; 
+            let params = [img, location, title, description, star, price];
+            // console.log(img, location, title, description, star, price);
+            connection.query(sql, params, 
+                (err, rows, fields) => {
+                    res.send(rows);
+                }   
+            )    
+        })
+    }
+    catch {
+        res.status(401).send({message:'login이 필요합니다'})
+    }
 })
 
 app.delete('/openmat/api/:id', (req, res) => {

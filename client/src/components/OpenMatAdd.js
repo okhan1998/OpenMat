@@ -25,13 +25,14 @@ function OpenMatAdd(props) {
         open: false
     })
 
-    const handleFormSubmit = (e) => {
+    const handleFormSubmit = async (e) => {
         e.preventDefault()
         addCustomer()
-            .then((res) => {
-                console.log(res.data);
-                props.stateRefresh();
-            })
+        .then(res => res.json())
+        .then(data => console.log(data.message))
+        
+        .finally(() => props.stateRefresh());
+            
         setOpenMat({
             ...openmat,
             file: null,
